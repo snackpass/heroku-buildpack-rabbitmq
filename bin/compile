@@ -11,39 +11,41 @@ set-env() {
   echo "export $1=$2" >> $PROFILE_PATH
 }
 
-mktmpdir() {
-  dir=$(mktemp -t fakesu-$1-XXXX)
-  rm -rf $dir
-  mkdir -p $dir
-  echo $dir
-}
+#!/bin/sh
 
-BUILD_DIR=$1
-CACHE_DIR=$2
-VERSION="3.0.4"
-REDIS_BUILD="$(mktmpdir redis)"
-INSTALL_DIR="$BUILD_DIR/.heroku/vendor/redis"
-PROFILE_PATH="$BUILD_DIR/.profile.d/redis.sh"
+## If sudo is not available on the system,
+## uncomment the line below to install it
+# apt-get install -y sudo
 
-mkdir -p $INSTALL_DIR
-mkdir -p $(dirname $PROFILE_PATH)
-mkdir -p $CACHE_DIR
+sudo apt-get update -y
 
-if [ ! -d $CACHE_DIR/redis_$VERSION ]; then
-	echo "Fetching and installing redis" | indent
-	cd $REDIS_BUILD
-	curl -OL "http://download.redis.io/releases/redis-$VERSION.tar.gz"
-	tar zxvf "redis-$VERSION.tar.gz"
-	cd "redis-$VERSION"
-	make
-	make PREFIX=$CACHE_DIR/redis_$VERSION/ install
-	cp -r $CACHE_DIR/redis_$VERSION/* $INSTALL_DIR/
-else
-	echo "Installing redis from cache" | indent
-	cp -r $CACHE_DIR/redis_$VERSION/*  $INSTALL_DIR/
-fi
+## Install prerequisites
+sudo apt-get install curl gnupg -y
 
-set-env PATH '/app/.heroku/vendor/redis/bin:$PATH'
+## Install RabbitMQ signing key
+curl -fsSL https://github.com/rabbitmq/signing-keys/releases/download/2.0/rabbitmq-release-signing-key.asc | sudo apt-key add -
+
+## Install apt HTTPS transport
+sudo apt-get install apt-transport-https
+
+## Add Bintray repositories that provision latest RabbitMQ and Erlang 21.x releases
+sudo tee /etc/apt/sources.list.d/bintray.rabbitmq.list <<EOF
+## Installs the latest Erlang 22.x release.
+## Change component to "erlang-21.x" to install the latest 21.x version.
+## "bionic" as distribution name should work for any later Ubuntu or Debian release.
+## See the release to distribution mapping table in RabbitMQ doc guides to learn more.
+deb https://dl.bintray.com/rabbitmq-erlang/debian bionic erlang
+deb https://dl.bintray.com/rabbitmq/debian bionic main
+EOF
+
+## Update package indices
+sudo apt-get update -y
+
+## Install rabbitmq-server and its dependencies
+sudo apt-get install rabbitmq-server -y --fix-missing
+
+sudo wget https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/releases/download/v3.8.0/rabbitmq_delayed_message_exchange-3.8.0.ez -P /usr/lib/rabbitmq/plugins/
+
+sudo rabbitmq-plugins enable rabbitmq_delayed_message_exchange
 
 echo "Done" | indent
-
