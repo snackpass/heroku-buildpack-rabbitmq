@@ -15,21 +15,21 @@ set-env() {
 
 ## If sudo is not available on the system,
 ## uncomment the line below to install it
-apt-get install -y sudo
+##apt-get install -y sudo
 
-sudo apt-get update -y
+apt-get update -y
 
 ## Install prerequisites
-sudo apt-get install curl gnupg -y
+apt-get install curl gnupg -y
 
 ## Install RabbitMQ signing key
-curl -fsSL https://github.com/rabbitmq/signing-keys/releases/download/2.0/rabbitmq-release-signing-key.asc | sudo apt-key add -
+curl -fsSL https://github.com/rabbitmq/signing-keys/releases/download/2.0/rabbitmq-release-signing-key.asc |  apt-key add -
 
 ## Install apt HTTPS transport
-sudo apt-get install apt-transport-https
+apt-get install apt-transport-https
 
 ## Add Bintray repositories that provision latest RabbitMQ and Erlang 21.x releases
-sudo tee /etc/apt/sources.list.d/bintray.rabbitmq.list <<EOF
+tee /etc/apt/sources.list.d/bintray.rabbitmq.list <<EOF
 ## Installs the latest Erlang 22.x release.
 ## Change component to "erlang-21.x" to install the latest 21.x version.
 ## "bionic" as distribution name should work for any later Ubuntu or Debian release.
@@ -39,13 +39,13 @@ deb https://dl.bintray.com/rabbitmq/debian bionic main
 EOF
 
 ## Update package indices
-sudo apt-get update -y
+ apt-get update -y
 
 ## Install rabbitmq-server and its dependencies
-sudo apt-get install rabbitmq-server -y --fix-missing
+apt-get install rabbitmq-server -y --fix-missing
 
-sudo wget https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/releases/download/v3.8.0/rabbitmq_delayed_message_exchange-3.8.0.ez -P /usr/lib/rabbitmq/plugins/
+wget https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/releases/download/v3.8.0/rabbitmq_delayed_message_exchange-3.8.0.ez -P /usr/lib/rabbitmq/plugins/
 
-sudo rabbitmq-plugins enable rabbitmq_delayed_message_exchange
+rabbitmq-plugins enable rabbitmq_delayed_message_exchange
 
 echo "Done" | indent
