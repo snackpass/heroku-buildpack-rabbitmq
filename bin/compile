@@ -30,7 +30,7 @@ mkdir $RABBIT_TMP/logs
 mkdir $RABBIT_TMP/plugins
 mkdir $RABBIT_TMP/enabled-plugins
 touch  $RABBIT_TMP/enabled-plugins/enabled_plugins
-mkdir data-base
+mkdir $RABBIT_TMP/data-base
 set-env RABBITMQ_MNESIA_DIR '$RABBIT_TMP/data-base'
 export RABBITMQ_MNESIA_DIR='$RABBIT_TMP/data-base'
 
@@ -49,15 +49,16 @@ sed  -i 's|/usr/lib/erlang|/app/.apt/usr/lib/erlang|g' /app/.apt/usr/lib/erlang/
 
 sed -i 's|/usr/lib/erlang|/app/.apt/usr/lib/erlang|g'  /app/.apt/usr/bin/erl
 set-env RABBITMQ_PLUGINS_DIR '/app/.apt/usr/lib/rabbitmq/lib/rabbitmq_server-3.6.10/plugins:$RABBITMQ_PLUGINS_DIR'
-
+export RABBITMQ_PLUGINS_DIR='/app/.apt/usr/lib/rabbitmq/lib/rabbitmq_server-3.6.10/plugins:$RABBITMQ_PLUGINS_DIR'
 
 set-env RABBITMQ_ENABLED_PLUGINS_FILE '$RABBIT_TMP/plugins/enabled_plugins'
 export RABBITMQ_ENABLED_PLUGINS_FILE="$RABBIT_TMP/plugins/enabled_plugins"
 touch $RABBITMQ_ENABLED_PLUGINS_FILE
 wget https://dl.bintray.com/rabbitmq/community-plugins/3.6.x/rabbitmq_delayed_message_exchange/rabbitmq_delayed_message_exchange-20171215-3.6.x.zip -P /app/.apt/usr/lib/rabbitmq/lib/rabbitmq_server-3.6.10/plugins
-unzip   /app/.apt/usr/lib/rabbitmq/lib/rabbitmq_server-3.6.10/plugins/rabbitmq_delayed_message_exchange-20171215-3.6.x.zip
+cd /app/.apt/usr/lib/rabbitmq/lib/rabbitmq_server-3.6.10/plugins
+unzip rabbitmq_delayed_message_exchange-20171215-3.6.x.zip
 echo "moving the plugin"
-mv  rabbitmq_delayed_message_exchange* /app/.apt/usr/lib/rabbitmq/lib/rabbitmq_server-3.6.10/plugins/
+#mv  rabbitmq_delayed_message_exchange* /app/.apt/usr/lib/rabbitmq/lib/rabbitmq_server-3.6.10/plugins/
 echo "enabling the plugin"
 
 
