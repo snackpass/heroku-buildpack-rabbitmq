@@ -56,7 +56,9 @@ set-env PATH '$PATH'
 
 echo "RabbitMQ Setup"
 echo $BUILDPACK_DIR
+
 cat<<EOF > $BUILDPACK_DIR/background
+PATH=$PATH
 rabbitmq-server &
 EOF
 
