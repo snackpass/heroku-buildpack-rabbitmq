@@ -12,6 +12,11 @@ set-env() {
 }
 
 #!/bin/sh
+BUILD_DIR=$1
+CACHE_DIR=$2
+ENV_DIR=$3
+BUILDPACK_DIR="$(dirname $(dirname $0))"
+
 PROFILE_PATH="$BUILD_DIR/.profile.d/rabbitmq.sh"
 touch $PROFILE_PATH
 
