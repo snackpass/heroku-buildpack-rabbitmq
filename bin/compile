@@ -38,6 +38,7 @@ unzip   /app/.apt/usr/lib/rabbitmq/lib/rabbitmq_server-3.6.10/plugins/rabbitmq_d
 mv  rabbitmq_delayed_message_exchange* /app/.apt/usr/lib/rabbitmq/lib/rabbitmq_server-3.6.10/plugins/
   rabbitmq-plugins enable rabbitmq_delayed_message_exchange
 
+echo "RabbitMQ Setup"
 
 cat<<EOF > $BUILDPACK_DIR/background
 rabbitmq-server &
