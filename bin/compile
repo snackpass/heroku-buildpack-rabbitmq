@@ -58,7 +58,10 @@ unzip   /app/.apt/usr/lib/rabbitmq/lib/rabbitmq_server-3.6.10/plugins/rabbitmq_d
 echo "moving the plugin"
 mv  rabbitmq_delayed_message_exchange* /app/.apt/usr/lib/rabbitmq/lib/rabbitmq_server-3.6.10/plugins/
 echo "enabling the plugin"
-rabbitmq-plugins enable rabbitmq_delayed_message_exchange
+export PATH=$PATH:/app/.apt/usr/bin/
+/app/.apt/usr/lib/rabbitmq/bin/rabbitmq-plugins enable rabbitmq_delayed_message_exchange
+
+
 echo "plugin enabled"
 set-env PATH '$PATH'
 
