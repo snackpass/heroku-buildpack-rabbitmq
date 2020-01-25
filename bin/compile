@@ -30,8 +30,8 @@ sed  -i 's|/usr/lib/erlang|/app/.apt/usr/lib/erlang|g' /app/.apt/usr/lib/erlang/
 
 sed -i 's|/usr/lib/erlang|/app/.apt/usr/lib/erlang|g'  /app/.apt/usr/bin/erl
 export RABBITMQ_PLUGINS_DIR=/app/.apt/usr/lib/rabbitmq/lib/rabbitmq_server-3.6.10/plugins:$RABBITMQ_PLUGINS_DIR
-mkdir $RABBIT_TMP/plugins
-touch  $RABBIT_TMP/plugins/enabled_plugins
+mkdir $RABBIT_TMP/enabled-plugins
+touch  $RABBIT_TMP/enabled-plugins/enabled_plugins
 export RABBITMQ_ENABLED_PLUGINS_FILE=$RABBIT_TMP/plugins/enabled_plugins
 wget https://dl.bintray.com/rabbitmq/community-plugins/3.6.x/rabbitmq_delayed_message_exchange/rabbitmq_delayed_message_exchange-20171215-3.6.x.zip -P /app/.apt/usr/lib/rabbitmq/lib/rabbitmq_server-3.6.10/plugins
 unzip   /app/.apt/usr/lib/rabbitmq/lib/rabbitmq_server-3.6.10/plugins/rabbitmq_delayed_message_exchange-20171215-3.6.x.zip
