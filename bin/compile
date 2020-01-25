@@ -12,6 +12,8 @@ set-env() {
 }
 
 #!/bin/sh
+PROFILE_PATH="$BUILD_DIR/.profile.d/rabbitmq.sh"
+touch $PROFILE_PATH
 
 
 set-env RABBITMQ_CONF_ENV_FILE '/tmp/'
@@ -39,7 +41,7 @@ mv  rabbitmq_delayed_message_exchange* /app/.apt/usr/lib/rabbitmq/lib/rabbitmq_s
   rabbitmq-plugins enable rabbitmq_delayed_message_exchange
 
 echo "RabbitMQ Setup"
-
+echo $BUILDPACK_DIR
 cat<<EOF > $BUILDPACK_DIR/background
 rabbitmq-server &
 EOF
