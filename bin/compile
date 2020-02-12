@@ -11,6 +11,8 @@ set-env() {
   echo "export $1=$2" >> $PROFILE_PATH
 }
 
+# TODO should wrap this all in a cache block
+
 #!/bin/sh
 BUILD_DIR=$1
 CACHE_DIR=$2
