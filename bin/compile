@@ -56,7 +56,7 @@ export RABBITMQ_PLUGINS_DIR='/app/.apt/usr/lib/rabbitmq/lib/rabbitmq_server-3.6.
 set-env RABBITMQ_ENABLED_PLUGINS_FILE '$RABBIT_TMP/plugins/enabled_plugins'
 export RABBITMQ_ENABLED_PLUGINS_FILE="$RABBIT_TMP/plugins/enabled_plugins"
 touch $RABBITMQ_ENABLED_PLUGINS_FILE
-wget https://firebasestorage.googleapis.com/v0/b/futura-c7f12.appspot.com/o/SnackPackages%2Frabbitmq_delayed_message_exchange-0.0.1.ez?alt=media&token=8e55e0e7-c2d0-4f41-a3e2-87c2877317f2 -P /app/.apt/usr/lib/rabbitmq/lib/rabbitmq_server-3.6.10/plugins
+wget "https://firebasestorage.googleapis.com/v0/b/futura-c7f12.appspot.com/o/SnackPackages%2Frabbitmq_delayed_message_exchange-0.0.1.ez?alt=media&token=8e55e0e7-c2d0-4f41-a3e2-87c2877317f2" -P /app/.apt/usr/lib/rabbitmq/lib/rabbitmq_server-3.6.10/plugins
 cd /app/.apt/usr/lib/rabbitmq/lib/rabbitmq_server-3.6.10/plugins
 # unzip rabbitmq_delayed_message_exchange-20171215-3.6.x.zip
 # echo "moving the plugin"
