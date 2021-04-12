@@ -60,7 +60,7 @@ wget https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/archive/refs/
 cd /app/.apt/usr/lib/rabbitmq/lib/rabbitmq_server-3.6.10/plugins
 unzip rabbitmq_v3_6_10.zip
 echo "moving the plugin"
-mv  rabbitmq_delayed_message_exchange* /app/.apt/usr/lib/rabbitmq/lib/rabbitmq_server-3.6.10/plugins/
+mv rabbitmq-delayed-message-exchange-rabbitmq_v3_6_10 /app/.apt/usr/lib/rabbitmq/lib/rabbitmq_server-3.6.10/plugins/rabbitmq-delayed-message-exchange-rabbitmq_v3_6_10
 echo "enabling the plugin"
 
 
