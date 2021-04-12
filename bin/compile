@@ -63,10 +63,6 @@ echo "moving the plugin"
 # mv rabbitmq-delayed-message-exchange-rabbitmq_v3_6_10 /app/.apt/usr/lib/rabbitmq/lib/rabbitmq_server-3.6.10/plugins
 echo "enabling the plugin"
 
-ls /app/.apt/usr/lib
-ls /app/.apt/usr/lib/rabbitmq
-ls /app/.apt/usr/lib/rabbitmq/bin
-ls /app/.apt/usr/lib/rabbitmq/bin/rabbitmq-plugins
 /app/.apt/usr/lib/rabbitmq/bin/rabbitmq-plugins enable rabbitmq_delayed_message_exchange
 
 
